@@ -5,6 +5,7 @@ let babel = require('babelify');
 let browserify = require('browserify');
 let source = require('vinyl-source-stream');
 let watchify = require('watchify');
+let livereload = require('gulp-livereload');
 
 gulp.task('styles', () => {
   gulp
@@ -29,7 +30,8 @@ function compile(watch) {
       .bundle()
       .pipe(source('index.js'))
       .pipe(rename('app.js'))
-      .pipe(gulp.dest('./public/js'));
+      .pipe(gulp.dest('./public/js'))
+      .pipe(livereload());
   }
 
   if (watch) {
@@ -44,6 +46,9 @@ function compile(watch) {
 
 gulp.task('build', () => {  return compile(); });
 
-gulp.task('watch', () => {  return compile(true); });
+gulp.task('watch', () => {
+  livereload.listen();
+  return compile(true); 
+});
 
 gulp.task('default', ['styles', 'assets', 'build']);
