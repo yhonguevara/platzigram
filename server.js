@@ -10,7 +10,14 @@ app.use(express.static(`${__dirname}/public`));
 
 app.get('/', (req, res) => {
   res.render('index');
-  // res.send('Hello World!');
+});
+
+app.get('/signin', (req, res) => {
+  res.render('index');
+});
+
+app.get('/signup', (req, res) => {
+  res.render('index');
 });
 
 app.listen(PORT, (err) => {
