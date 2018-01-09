@@ -153,9 +153,24 @@ module.exports = hyperx(belCreateElement, {comments: true})
 module.exports.default = module.exports
 module.exports.createElement = belCreateElement
 
-},{"global/document":3,"hyperx":6,"on-load":10}],2:[function(require,module,exports){
+},{"global/document":4,"hyperx":7,"on-load":11}],2:[function(require,module,exports){
 
 },{}],3:[function(require,module,exports){
+/* global HTMLElement */
+
+'use strict'
+
+module.exports = function emptyElement (element) {
+  if (!(element instanceof HTMLElement)) {
+    throw new TypeError('Expected an element')
+  }
+
+  var node
+  while ((node = element.lastChild)) element.removeChild(node)
+  return element
+}
+
+},{}],4:[function(require,module,exports){
 (function (global){
 var topLevel = typeof global !== 'undefined' ? global :
     typeof window !== 'undefined' ? window : {}
@@ -176,7 +191,7 @@ if (typeof document !== 'undefined') {
 module.exports = doccy;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"min-document":2}],4:[function(require,module,exports){
+},{"min-document":2}],5:[function(require,module,exports){
 (function (global){
 var win;
 
@@ -193,7 +208,7 @@ if (typeof window !== "undefined") {
 module.exports = win;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 module.exports = attributeToProperty
 
 var transform = {
@@ -214,7 +229,7 @@ function attributeToProperty (h) {
   }
 }
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var attrToProp = require('hyperscript-attribute-to-property')
 
 var VAR = 0, TEXT = 1, OPEN = 2, CLOSE = 3, ATTR = 4
@@ -497,12 +512,12 @@ var closeRE = RegExp('^(' + [
 ].join('|') + ')(?:[\.#][a-zA-Z0-9\u007F-\uFFFF_:-]+)*$')
 function selfClosing (tag) { return closeRE.test(tag) }
 
-},{"hyperscript-attribute-to-property":5}],7:[function(require,module,exports){
+},{"hyperscript-attribute-to-property":6}],8:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 var range; // Create a range object for efficently rendering strings to elements.
@@ -1186,7 +1201,7 @@ var morphdom = morphdomFactory(morphAttrs);
 
 module.exports = morphdom;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 assert.notEqual = notEqual
 assert.notOk = notOk
 assert.equal = equal
@@ -1210,7 +1225,7 @@ function assert (t, m) {
   if (!t) throw new Error(m || 'AssertionError')
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 /* global MutationObserver */
 var document = require('global/document')
 var window = require('global/window')
@@ -1314,7 +1329,7 @@ function eachMutation (nodes, fn) {
   }
 }
 
-},{"assert":9,"global/document":3,"global/window":4}],11:[function(require,module,exports){
+},{"assert":10,"global/document":4,"global/window":5}],12:[function(require,module,exports){
 (function (process){
   /* globals require, module */
 
@@ -1940,7 +1955,7 @@ function eachMutation (nodes, fn) {
   page.sameOrigin = sameOrigin;
 
 }).call(this,require('_process'))
-},{"_process":13,"path-to-regexp":12}],12:[function(require,module,exports){
+},{"_process":14,"path-to-regexp":13}],13:[function(require,module,exports){
 var isarray = require('isarray')
 
 /**
@@ -2332,7 +2347,7 @@ function pathToRegexp (path, keys, options) {
   return stringToRegexp(path, keys, options)
 }
 
-},{"isarray":7}],13:[function(require,module,exports){
+},{"isarray":8}],14:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2518,7 +2533,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 var bel = require('bel') // turns template tag into DOM elements
 var morphdom = require('morphdom') // efficiently diffs + morphs two DOM elements
 var defaultEvents = require('./update-events.js') // default events to be copied when dom elements update
@@ -2562,7 +2577,7 @@ module.exports.update = function (fromNode, toNode, opts) {
   }
 }
 
-},{"./update-events.js":15,"bel":1,"morphdom":8}],15:[function(require,module,exports){
+},{"./update-events.js":16,"bel":1,"morphdom":9}],16:[function(require,module,exports){
 module.exports = [
   // attribute events (can be set with attributes)
   'onclick',
@@ -2600,24 +2615,23 @@ module.exports = [
   'onfocusout'
 ]
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 var _templateObject = _taggedTemplateLiteral(['<div class="container">\n      <div class="row">\n        <div class="col s10 push-s1">\n          <div class="row">\n            <div class="col m5 hide-on-small-only">\n              <img src="img/iphone.png" class="iphone"/>\n            </div>\n            <div class="col s12 m7">\n              <div class="row">\n                <div class="signup-box">\n                  <h1 class="platzigram">Plazigram</h1>\n                  <form class="signup-form">\n                    <h2>Reg\xEDstrate para ver fotos de tus amigos estudiantes de Platzi</h2>\n                    <div class="selection">\n                      <a class="btn btn-fb hide-on-small-only">Iniciar sesi\xF3n con Facebook</a>\n                      <a class="btn btn-fb hide-on-med-and-up">Iniciar sesi\xF3n</a>\n                    </div>\n                    <div class="divider"></div>\n                    <div class="section">\n                      <input type="text" name="email" placeholder="Correo Electr\xF3nico" />\n                      <input type="text" name="name" placeholder="Nombre completo" />\n                      <input type="text" name="username" placeholder="Nombre de usuario" />\n                      <input type="password" name="password" placeholder="Contrase\xF1a" />\n                      <button class="btn waves-effect waves-light btn-signup" type="submit">Reg\xEDstrate</button>\n                    </div>\n                  </form>\n                </div>\n              </div>\n              <div class="row">\n                <div class="login-box">\n                  \xBFTienes una cuenta? <a href="/signin">Entrar</a>\n                </div>\n              </div>\n            </div>            \n          </div>\n        </div>\n      </div>\n    </div>'], ['<div class="container">\n      <div class="row">\n        <div class="col s10 push-s1">\n          <div class="row">\n            <div class="col m5 hide-on-small-only">\n              <img src="img/iphone.png" class="iphone"/>\n            </div>\n            <div class="col s12 m7">\n              <div class="row">\n                <div class="signup-box">\n                  <h1 class="platzigram">Plazigram</h1>\n                  <form class="signup-form">\n                    <h2>Reg\xEDstrate para ver fotos de tus amigos estudiantes de Platzi</h2>\n                    <div class="selection">\n                      <a class="btn btn-fb hide-on-small-only">Iniciar sesi\xF3n con Facebook</a>\n                      <a class="btn btn-fb hide-on-med-and-up">Iniciar sesi\xF3n</a>\n                    </div>\n                    <div class="divider"></div>\n                    <div class="section">\n                      <input type="text" name="email" placeholder="Correo Electr\xF3nico" />\n                      <input type="text" name="name" placeholder="Nombre completo" />\n                      <input type="text" name="username" placeholder="Nombre de usuario" />\n                      <input type="password" name="password" placeholder="Contrase\xF1a" />\n                      <button class="btn waves-effect waves-light btn-signup" type="submit">Reg\xEDstrate</button>\n                    </div>\n                  </form>\n                </div>\n              </div>\n              <div class="row">\n                <div class="login-box">\n                  \xBFTienes una cuenta? <a href="/signin">Entrar</a>\n                </div>\n              </div>\n            </div>            \n          </div>\n        </div>\n      </div>\n    </div>']);
 
-function _taggedTemplateLiteral(strings, raw) {
-  return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } }));
-}
+function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
 var page = require('page');
 var yo = require('yo-yo');
+var empty = require('empty-element');
 
 var main = document.getElementById('main-container');
 
 page('/', function (ctx, next) {
   var el = yo(_templateObject);
 
-  main.appendChild(el);
+  empty(main).appendChild(el);
 });
 
 page('/signup', function (ctx, next) {});
@@ -2626,4 +2640,4 @@ page('/signup', function (ctx, next) {});
 // 
 page.start();
 
-},{"page":11,"yo-yo":14}]},{},[16]);
+},{"empty-element":3,"page":12,"yo-yo":15}]},{},[17]);

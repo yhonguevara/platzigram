@@ -1,5 +1,6 @@
 let page = require('page');
 let yo = require('yo-yo');
+let empty = require('empty-element');
 
 let main = document.getElementById('main-container');
 
@@ -43,7 +44,7 @@ page('/', (ctx, next) => {
       </div>
     </div>`;
 
-    main.appendChild(el);
+    empty(main).appendChild(el);
 });
 
 page('/signup', (ctx, next) => {
