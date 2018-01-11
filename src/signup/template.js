@@ -10,7 +10,7 @@ let box = yo`
           <h2>Regístrate para ver fotos de tus amigos estudiantes de Platzi</h2>
           <div class="selection">
             <a class="btn btn-fb hide-on-small-only">Iniciar sesión con Facebook</a>
-            <a class="btn btn-fb hide-on-med-and-up">Iniciar sesión</a>
+            <a class="btn btn-fb hide-on-med-and-up"><i class="fab fa-facebook" area-hidden="true"></i> Iniciar sesión</a>
           </div>
           <div class="divider"></div>
           <div class="section">
